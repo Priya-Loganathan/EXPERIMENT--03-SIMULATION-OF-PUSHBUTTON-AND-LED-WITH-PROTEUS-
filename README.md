@@ -73,39 +73,32 @@ Developed by: DELLI PRIYA L
 Reference number: 212222230029
 
 #include "main.h"
+#include"stdio.h"
+#include"stdbool.h"
+bool pm;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-
 int main(void)
 {
-    HAL_Init();
+  HAL_Init();
   SystemClock_Config();
-
   MX_GPIO_Init();
- 
-  while (1)
-  {
-	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);
-      HAL_Delay(500);
-      HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);
-      HAL_Delay(500); 
+	  while (1)
+	    {
+	     pm= HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_1);
+	      if(pm==0)
+              {
+	  	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);
+	  	HAL_Delay(1000);
+	  	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);
+	  	HAL_Delay(1000);
+	       }
+	      else
+	       {
+	  	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);
+	        }
+	     }
   }
-}
-
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
-  {
-    Error_Handler();
-  }
-}
-
-
-void Error_Handler(void)
-{
-  __disable_irq();
-  while (1)
-  {
-  }
-}
 ```
 
 ## Output screen shots of proteus  :
